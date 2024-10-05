@@ -31,6 +31,9 @@ document.getElementById('failure-data').innerHTML = `<p>Failure Type: ${failure 
 document.getElementById('add-measurement-button').addEventListener('click', () => {
     document.getElementById('measurement-form').style.display = 'block';
 });
+document.getElementById('close-measurement-form').addEventListener('click', () => {
+    document.getElementById('measurement-form').style.display = 'none';
+});
 
 // Handle form submission for new measurement
 document.getElementById('new-measurement-form').addEventListener('submit', (e) => {

@@ -1,48 +1,82 @@
+/* General body styling */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
     padding: 20px;
-  }
-  
-  h1 {
+    margin: 0;
+}
+
+/* Header styling */
+h1 {
     color: #343a40;
     text-align: center;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .machine-item {
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
+    margin-bottom: 30px;
+}
+
+/* Container for responsive layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+}
+
+/* Machine item container */
+.machine-item {
+    background-color: #ffffff;
+    border: 2px solid #77dd77;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .machine-item span {
-    font-size: 16px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Ensure it takes full width */
+}
+
+/* On hover */
+.machine-item:hover {
+    background-color: #e6ffe6;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Flex container for machine info */
+.machine-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Machine info styling */
+.machine-info div {
+    font-size: 18px;
     font-weight: bold;
     color: #495057;
-  }
-  
-  .details-button {
+    margin-right: 20px; /* Space between items */
+}
+
+/* Location styling */
+.machine-location {
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Details button styling */
+.details-button {
     text-decoration: none;
-    color: #007bff;
-    background-color: #e2e6ea;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .details-button:hover {
-    background-color: #007bff;
     color: #fff;
-  }
-  
+    background-color: #007bff;
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.details-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
