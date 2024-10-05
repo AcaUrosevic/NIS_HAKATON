@@ -70,6 +70,48 @@ def post_telemetry( ):
         return jsonify({"error": str(e)}), 400
     return b"Ok"
 
+@application.route ( "/get_measurements/<machine_name>", methods = ["GET"] )
+def get_measurements(machine_name):
+    offset = 50 * (int(request.args.get('page' , 1 ))-1)
+    print(offset)
+    measurements = database.session.query(
+        Telemetryd.measure_date,
+        Telemetryd.napon_ab,
+        Telemetryd.napon_bc,
+        Telemetryd.napon_ca,
+        Telemetryd.elektricna_struja_fazaa,
+        Telemetryd.elektricna_struja_fazab,
+        Telemetryd.elektricna_struja_fazac,
+        Telemetryd.koeficijent_kapaciteta,
+        Telemetryd.frekvencija,
+        Telemetryd.radno_opterecenje,
+        Telemetryd.aktivna_snaga,
+        Telemetryd.pritisak_na_prijemu_pumpe,
+        Telemetryd.temperatura_motora,
+        Telemetryd.temperatura_u_busotini
+    ).filter( Telemetryd.well == machine_name ).limit(50).offset(offset).all()
+    retval = []
+
+    for measurement in measurements:
+        retval.append({
+            "measure_date": measurement[0],
+            "napon_ab": measurement[1],
+            "napon_bc": measurement[2],
+            "napon_ca": measurement[3],
+            "struja_a": measurement[4],
+            "struja_b": measurement[5],
+            "struja_c": measurement[6],
+            "koef_kap": measurement[7],
+            "frekvencija": measurement[8],
+            "radno_opterecenje": measurement[9],
+            "aktivna_snaga": measurement[10],
+            "pritisak": measurement[11],
+            "temp_motora": measurement[12],
+            "temp_busotina": measurement[13]
+        })
+
+
+    return jsonify(retval)
 
 if ( __name__ == "__main__" ):
     PORT = os.environ["PORT"] if ( "PORT" in os.environ ) else "5000"
