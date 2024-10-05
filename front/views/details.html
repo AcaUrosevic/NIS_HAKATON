@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Details</title>
+    <link rel="stylesheet" href="../styles/details.css">
+</head>
+<body>
+    <h1 id="machine-name">Machine Details</h1>
+    
+    <h2>Last Telemetry Data</h2>
+    <div id="telemetry-data"></div>
+
+    <h2>Prediction</h2>
+    <div id="prediction"></div>
+
+    <h2>Failure Type</h2>
+    <div id="failure-data"></div>
+    
+    <!-- Button to open the form for new measurement -->
+    <button id="add-measurement-button">Add New Measurement</button>
+    
+    <!-- Hidden form for new measurement -->
+    <div id="measurement-form" style="display:none;">
+        <h3>Add New Measurement</h3>
+        <form id="new-measurement-form">
+            <label>Well: <input type="text" id="well" value="well_1" readonly></label><br>
+            <label>Measure Date: <input type="datetime-local" id="measure_date" value=""></label><br>
+            <label>Napon AB: <input type="text" id="napon_ab" ></label><br>
+            <label>Napon BC: <input type="text" id="napon_bc" ></label><br>
+            <label>Napon CA: <input type="text" id="napon_ca" ></label><br>
+            <label>Struja Faza A: <input type="text" id="struja_a" ></label><br>
+            <label>Struja Faza B: <input type="text" id="struja_b" ></label><br>
+            <label>Struja Faza C: <input type="text" id="struja_c" ></label><br>
+            <label>Koeficijent Kapaciteta: <input type="text" id="koef_kap" ></label><br>
+            <label>Frekvencija: <input type="text" id="frekvencija" ></label><br>
+            <label>Radno Opterećenje: <input type="text" id="radno_opterecenje" ></label><br>
+            <label>Aktivna Snaga: <input type="text" id="aktivna_snaga" ></label><br>
+            <label>Pritisak na Prijemu Pumpe: <input type="text" id="pritisak" ></label><br>
+            <label>Temperatura Motora: <input type="text" id="temp_motora" ></label><br>
+            <label>Temperatura u Bušotini: <input type="text" id="temp_busotina" ></label><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <a href="index.html">Back to List</a>
+
+    <script src="../scripts/details.js"></script>
+</body>
+</html>
