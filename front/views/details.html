@@ -25,7 +25,7 @@
     <div id="measurement-form" style="display:none;">
         <h3>Add New Measurement</h3>
         <form id="new-measurement-form">
-            <label>Well: <input type="text" id="well" value="well_1" readonly></label><br>
+            <label>Well: <input type="text" id="well" readonly></label><br>
             <label>Measure Date: <input type="datetime-local" id="measure_date" value=""></label><br>
             <label>Napon AB: <input type="text" id="napon_ab" ></label><br>
             <label>Napon BC: <input type="text" id="napon_bc" ></label><br>
@@ -46,6 +46,37 @@
     </div>
 
     <a href="index.html">Back to List</a>
+    <h2>Measurement Data</h2>
+    <table id="measurement-table">
+        <thead>
+            <tr>
+                <th>Measure Date</th>
+                <th>Napon AB</th>
+                <th>Napon BC</th>
+                <th>Napon CA</th>
+                <th>Struja A</th>
+                <th>Struja B</th>
+                <th>Struja C</th>
+                <th>Koef. Kapaciteta</th>
+                <th>Frekvencija</th>
+                <th>Radno Opterećenje</th>
+                <th>Aktivna Snaga</th>
+                <th>Pritisak</th>
+                <th>Temp. Motora</th>
+                <th>Temp. Bušotine</th>
+            </tr>
+        </thead>
+        <tbody id="measurement-tbody">
+            <!-- Data will be loaded here dynamically -->
+        </tbody>
+    </table>
+
+    <!-- Pagination controls -->
+    <div id="pagination-controls">
+        <button id="prev-page">Previous</button>
+        <span id="current-page">Page 1</span>
+        <button id="next-page">Next</button>
+    </div>
 
     <script src="../scripts/details.js"></script>
 </body>

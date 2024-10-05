@@ -8,7 +8,7 @@ from flask import request
 from models import database
 from models import Info, Event, Telemetryd
 
-from sqlalchemy import and_, column, distinct, func, literal_column, null, select
+from sqlalchemy import and_, column, distinct, func, literal_column, null, select, desc
 
 from configuration import Configuration
 
@@ -41,7 +41,7 @@ def get_machines (name):
 @application.route("/add_measurement", methods=["POST"])
 def post_telemetry( ):
     obj = request.get_json()
-    #print (obj['aa'])
+    print (obj)
     new_id = database.session.query(func.max(Telemetryd.id)).scalar() + 1
     print(id)
     try:
@@ -68,7 +68,7 @@ def post_telemetry( ):
     except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 400
-    return b"Ok"
+    return jsonify({"response": "ok"})
 
 @application.route ( "/get_measurements/<machine_name>", methods = ["GET"] )
 def get_measurements(machine_name):
@@ -89,7 +89,7 @@ def get_measurements(machine_name):
         Telemetryd.pritisak_na_prijemu_pumpe,
         Telemetryd.temperatura_motora,
         Telemetryd.temperatura_u_busotini
-    ).filter( Telemetryd.well == machine_name ).limit(50).offset(offset).all()
+    ).filter( Telemetryd.well == machine_name ).order_by(desc(Telemetryd.measure_date)).limit(50).offset(offset).all()
     retval = []
 
     for measurement in measurements:

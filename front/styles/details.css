@@ -70,6 +70,15 @@ button[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+#add-measurement-button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 button[type="submit"]:hover {
     background-color: #0056b3;
@@ -90,4 +99,52 @@ a:hover {
     background-color: #007bff;
     color: #fff;
 }
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #dee2e6;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#pagination-controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#pagination-controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pagination-controls button:hover {
+    background-color: #0056b3;
+}
+
+#current-page {
+    margin: 0 10px;
+}
+
 
