@@ -3,3 +3,4 @@ flask-sqlalchemy
 setuptools
 mysqlclient
 cryptography
+flask-cors
