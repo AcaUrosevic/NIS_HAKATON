@@ -1,0 +1,34 @@
+version: "3"
+services:
+  database:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mydb
+    ports:
+      - 3310:3306
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+
+  backapi:
+    image: backapi
+    environment:
+      - PRODUCTION=True
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_URL=database
+      - DATABASE_NAME=mydb
+    ports:
+      - 3000:5000
+    depends_on:
+      - database
+    # Adding a health check to wait for MySQL to be ready
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
