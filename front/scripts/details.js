@@ -120,15 +120,15 @@ fetch(`http://localhost:3000/get_machines/${machineId}`)
     
     // Pagination controls
     document.getElementById('prev-page').addEventListener('click', () => {
-        if (currentPage >= 1) {
+        if (currentPage > 1) {
             currentPage--;
             loadMeasurements(currentPage);
-            document.getElementById('current-page').innerText = `Page ${currentPage + 1}`;
+            document.getElementById('current-page').innerText = `Page ${currentPage}`;
         }
     });
     
     document.getElementById('next-page').addEventListener('click', () => {
         currentPage++;
         loadMeasurements(currentPage);
-        document.getElementById('current-page').innerText = `Page ${currentPage + 1}`;
+        document.getElementById('current-page').innerText = `Page ${currentPage}`;
     });
