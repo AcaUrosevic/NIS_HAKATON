@@ -7,16 +7,63 @@
     <link rel="stylesheet" href="../styles/details.css">
 </head>
 <body>
-    <h1 id="machine-name">Machine Details</h1>
+    <h1>Machine Details</h1>
     
-    <h2>Last Telemetry Data</h2>
-    <div id="telemetry-data"></div>
+    <div class="info-section">
+        <!-- Info Block -->
+        <div class="info-block" id="info-block">
+            <h2>Info</h2>
+            <p id="machine-info">Machine Name: <span id="machine-name-info"></span></p>
+            <p>Last Tested: <span id="last-tested"></span></p>
+            <p>Location: <span id="location"></span></p>
+        </div>
 
-    <h2>Prediction</h2>
-    <div id="prediction"></div>
+        <!-- Failure Type Block -->
+        <div class="failure-block" id="failure-block">
+            <h2>Failure Type</h2>
+            <p>Failure Type: <span id="failure-type"></span></p>
+            <p>Next Inspection: <span id="next-inspection"></span></p>
+        </div>
 
-    <h2>Failure Type</h2>
-    <div id="failure-data"></div>
+        <!-- Validation Block -->
+        <div class="validation-block" id="validation-block">
+            <h2>Validation</h2>
+            <form id="validation-form">
+                <label for="date-from">Date From:</label>
+                <input type="date" id="date-from" name="date-from"><br><br>
+
+                <label for="date-to">Date To:</label>
+                <input type="date" id="date-to" name="date-to"><br><br>
+
+                <label for="parameter">Parameter:</label>
+                <select id="parameter" name="parameter">
+                    <option value="napon_ab">Napon AB</option>
+                    <option value="napon_bc">Napon BC</option>
+                    <option value="napon_ca">Napon CA</option>
+                    <option value="struja_a">Struja Faza A</option>
+                    <option value="struja_b">Struja Faza B</option>
+                    <option value="struja_c">Struja Faza C</option>
+                    <option value="koef_kap">Koeficijent Kapaciteta</option>
+                    <option value="frekvencija">Frekvencija</option>
+                    <option value="radno_opterecenje">Radno Opterećenje</option>
+                    <option value="aktivna_snaga">Aktivna Snaga</option>
+                    <option value="pritisak">Pritisak</option>
+                    <option value="temp_motora">Temperatura Motora</option>
+                    <option value="temp_busotina">Temperatura u Bušotini</option>
+                </select><br><br>
+
+                <button type="button" id="validate-button">Validate</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="graph-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h2>Graph of Measurements</h2>
+            <canvas id="measurement-graph"></canvas>
+        </div>
+    </div>
     
     <!-- Button to open the form for new measurement -->
     <button id="add-measurement-button">Add New Measurement</button>
@@ -78,6 +125,7 @@
         <button id="next-page">Next</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/details.js"></script>
 </body>
 </html>

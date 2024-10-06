@@ -146,5 +146,118 @@ tr:nth-child(even) {
 #current-page {
     margin: 0 10px;
 }
+/* Flex container for three blocks */
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Styling for the blocks */
+.info-block, .failure-block, .validation-block {
+    width: 25%; /* Each block takes up 30% of the available width */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    color: #495057;
+}
+
+/* Different background colors for each block */
+#info-block {
+    background-color: #f0f9ff; /* Light blue */
+    transition: background-color 0.3s ease-in-out;
+}
+#info-block:hover {
+    background-color: #d9f0ff; /* Light blue */
+    transition: ease;
+}
+
+#failure-block {
+    background-color: #fff0f0; /* Light red */
+    transition: background-color 0.3s ease-in-out;
+}
+#failure-block:hover {
+    background-color: #fedfdf; /* Light red */
+}
+
+#validation-block {
+    background-color: #f0fff0; /* Light green */
+    transition: background-color 0.3s ease-in-out;
+}
+#validation-block:hover{
+    background-color: #d6fad6; /* Light green */
+}
+
+/* Headings inside blocks */
+.info-block h2, .failure-block h2, .validation-block h2 {
+    margin-bottom: 15px;
+    color: #343a40;
+    font-size: 24px;
+}
+
+/* Form styling inside validation block */
+#validation-form label, #validation-form select, #validation-form input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+}
+
+/* Button styling in validation form */
+#validation-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#validation-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position:  fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 100%;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    margin-bottom: 100%;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+canvas {
+    width: 100% !important;
+    height: 400px !important;
+}
+
 
 

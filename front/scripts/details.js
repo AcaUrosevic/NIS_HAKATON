@@ -7,13 +7,13 @@ fetch(`http://localhost:3000/get_machines/${machineId}`)
     .then(response => response.json())
     .then(machine => {
         // Display machine data
-        document.getElementById('machine-name').innerText = machine[0].name;
-        document.getElementById('telemetry-data').innerHTML = `<p>Last Tested: ${machine[0].poslednji}</p>`;
-        document.getElementById('prediction').innerHTML = `<p>Prediction: ${machine[0].prediction}</p>`;
-        document.getElementById('well').value = machine[0].name;
+        document.getElementById('machine-name-info').innerText = machine[0].name;
+        document.getElementById('last-tested').innerText = machine[0].poslednji;
+        document.getElementById('location').innerText = machine[0].adress;
+        document.getElementById('next-inspection').innerText = machine[0].prediction;
 
         // Display failure type
-        document.getElementById('failure-data').innerHTML = `<p>Failure Type: ${machine[0].failure_type}</p>`;
+        document.getElementById('failure-type').innerText = machine[0].failure_type;
     })
     .catch(error => console.error('Error fetching machine details:', error));
 
@@ -132,3 +132,95 @@ fetch(`http://localhost:3000/get_machines/${machineId}`)
         loadMeasurements(currentPage);
         document.getElementById('current-page').innerText = `Page ${currentPage}`;
     });
+
+    // Get elements
+const validateButton = document.getElementById('validate-button');
+const graphModal = document.getElementById('graph-modal');
+const closeModalButton = document.getElementById('close-modal');
+
+// Open modal on validate click
+validateButton.addEventListener('click', () => {
+    const dateFrom = document.getElementById('date-from').value;
+    const dateTo = document.getElementById('date-to').value;
+    const parameter = document.getElementById('parameter').value;
+    
+    if (!dateFrom || !dateTo || !parameter) {
+        alert('Please select valid dates and parameter!');
+        return;
+    }
+    
+    // Send GET request to fetch data based on the selected date range and parameter
+    fetch(`http://localhost:3000/get_dots/${machineId}/${parameter}/${dateFrom}/${dateTo}`)
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('measurement-graph').getContext('2d');
+            
+            // Extract X (dates) and Y (values) from the returned data
+            const dates = data.map(entry => new Date(entry.x).toLocaleDateString());  // X-axis (dates)
+            const values = data.map(entry => parseFloat(entry.y));  // Y-axis (values)
+            // Find min and max values from the dataset
+            const minValue = Math.min(...values);
+            const maxValue = Math.max(...values);
+
+            // Calculate a margin to add some space below and above the values
+            const margin = (maxValue - minValue) * 0.3;  // 10% margin
+
+             // Destroy existing chart if it exists (to avoid duplicate rendering)
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+            
+            // Create new chart
+            window.myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates, // X-axis (dates)
+                    datasets: [{
+                        label: `${parameter} over time`,
+                        data: values, // Y-axis (values)
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Dates'
+                            }
+                        },
+                        y: {
+                            min: minValue - margin,  // Set minimum Y value with a little margin
+                            max: maxValue + margin,  // Set maximum Y value with a little margin
+                            title: {
+                                display: true,
+                                text: 'Parameter Value'
+                            }
+                        }
+                    }
+                }
+            });
+
+            graphModal.style.display = 'block';  // Show the modal
+        })
+        .catch(error => console.error('Error fetching graph data:', error));
+});
+
+// Close modal on X click
+closeModalButton.addEventListener('click', () => {
+    graphModal.style.display = 'none';  // Hide the modal
+});
+
+// Close modal if clicked outside the content
+window.onclick = function(event) {
+    if (event.target == graphModal) {
+        graphModal.style.display = 'none';
+    }
+};
+
+
+const y = document.getElementById('date-from');
+y.addEventListener('change',()=>{console.log(y.value)})
