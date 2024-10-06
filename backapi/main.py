@@ -113,6 +113,38 @@ def get_measurements(machine_name):
 
     return jsonify(retval)
 
+
+@application.route ( "/get_dots/<machine_name>/<param>/<start_date>/<end_date>", methods = ["GET"] )
+def get_dots(machine_name, param, start_date, end_date):
+    if param == "struja_a":
+        param = "elektricna_struja_fazaa"
+    elif param == "struja_b":
+        param = "elektricna_struja_fazab"
+    elif param == "struja_c":
+        param = "elektricna_struja_fazac"
+    elif param == "koef_kap":
+        param = "koeficijent_kapaciteta"
+    elif  param == "pritisak":
+        param = "pritisak_na_prijemu_pumpe"
+    elif  param == "temp_motora":
+        param = "temperatura_motora"
+    elif param == "temp_busotina":
+        param = "temperatura_u_busotini"
+
+
+    retval = []
+    dots = Telemetryd.query.filter( Telemetryd.measure_date.between(start_date, end_date)).all()
+
+    for dot in dots:
+        if getattr(dot, param) != "":
+            retval.append({
+                "x": dot.measure_date,
+                "y": getattr(dot, param)
+            })
+
+
+    return jsonify(retval)
+
 if ( __name__ == "__main__" ):
     PORT = os.environ["PORT"] if ( "PORT" in os.environ ) else "5000"
     HOST = "0.0.0.0" if ( "PRODUCTION" in os.environ ) else "localhost"
