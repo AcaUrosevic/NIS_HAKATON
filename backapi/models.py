@@ -50,3 +50,10 @@ class Telemetryd(database.Model):
     pritisak_na_prijemu_pumpe = Column(Text)
     temperatura_motora = Column(Text)
     temperatura_u_busotini = Column(Text)
+
+class Predikcije(database.Model):
+    __tablename__ = 'predikcije'
+
+    well = Column(String(50), primary_key=True)
+    days = Column(Integer)
+    decision = Column(Integer)

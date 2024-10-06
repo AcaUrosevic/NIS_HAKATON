@@ -94,6 +94,31 @@ LOCK TABLES `ml` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `predikcije`
+--
+
+DROP TABLE IF EXISTS `predikcije`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `predikcije` (
+  `well` varchar(50) NOT NULL,
+  `days` int DEFAULT NULL,
+  `decision` int DEFAULT NULL,
+  PRIMARY KEY (`well`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `predikcije`
+--
+
+LOCK TABLES `predikcije` WRITE;
+/*!40000 ALTER TABLE `predikcije` DISABLE KEYS */;
+INSERT INTO `predikcije` VALUES ('well_1',0,0),('well_10',0,0),('well_11',0,0),('well_12',0,0),('well_13',0,0),('well_14',0,0),('well_15',0,0),('well_16',0,0),('well_17',0,0),('well_18',0,0),('well_19',0,0),('well_2',0,0),('well_20',0,0),('well_21',0,0),('well_22',0,0),('well_23',0,0),('well_24',0,0),('well_25',0,0),('well_26',0,0),('well_27',0,0),('well_28',0,0),('well_29',0,0),('well_3',0,0),('well_30',0,0),('well_31',0,0),('well_32',1,0),('well_33',-3,0),('well_34',1,0),('well_35',139,14),('well_4',0,0),('well_5',0,0),('well_6',0,0),('well_7',0,0),('well_8',0,0),('well_9',0,0);
+/*!40000 ALTER TABLE `predikcije` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `telemetry`
 --
 
@@ -148,4 +173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-06  6:48:57
+-- Dump completed on 2024-10-06 10:32:44

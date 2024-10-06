@@ -28,6 +28,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  ml:
+    image: ml
+    environment:
+      - PRODUCTION=True
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_URL=database
+      - DATABASE_NAME=mydb
+    depends_on:
+      - database
+    # Adding a health check to wait for MySQL to be ready
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   adminer:
     image: adminer
     ports:

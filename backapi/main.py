@@ -6,7 +6,7 @@ from flask_cors import CORS
 from flask import request
 
 from models import database
-from models import Info, Event, Telemetryd
+from models import Info, Event, Telemetryd, Predikcije
 
 from sqlalchemy import and_, column, distinct, func, literal_column, null, select, desc
 
@@ -29,13 +29,19 @@ def get_machines (name):
 
     retval = []
 
+    
     static_prediction = "Failure in 15 days"
     static_failure_type = "Mechanical Failure"
 
     for client in clients:
+        objekat = Predikcije.query.filter_by(well= client[0]).first()
+        if objekat is None or objekat.days < 0:
+            predik = f"Failure won't occur in a long time."
+        else:
+            predik = f"Failure will occur in {objekat.days}."
         name = client[0]
         max_date = database.session.query(func.max(Event.datetime)).filter( Event.well == name ).group_by( Event.well ).scalar()
-        retval.append( {"adress" : client[1] , "name" : client[0] , "poslednji" : max_date , "prediction": static_prediction , "failure_type": static_failure_type} )
+        retval.append( {"adress" : client[1] , "name" : client[0] , "poslednji" : max_date , "prediction": predik , "failure_type": static_failure_type} )
     return jsonify( retval )
 
 @application.route("/add_measurement", methods=["POST"])
